@@ -356,7 +356,9 @@ public sealed class SettingsSliceOwnershipContractTests
         ["src/DeskBox/ViewModels/WeatherWidgetViewModel.RefreshAndLayout.cs"] = 1,
         ["src/DeskBox/ViewModels/WeatherWidgetViewModel.cs"] = 22,
         ["src/DeskBox/ViewModels/WidgetViewModel.ItemHydration.cs"] = 3,
-        ["src/DeskBox/ViewModels/WidgetViewModel.LayoutAndSettings.cs"] = 17,
+        // 17->19: EffectiveIconLabelHidden + SetEffectiveIconLabelHidden read
+        // the global file-name line count to resolve the per-widget override.
+        ["src/DeskBox/ViewModels/WidgetViewModel.LayoutAndSettings.cs"] = 19,
         ["src/DeskBox/ViewModels/WidgetViewModel.Operations.cs"] = 2,
         ["src/DeskBox/ViewModels/WidgetViewModel.Stacks.cs"] = 13,
         ["src/DeskBox/ViewModels/WidgetViewModel.cs"] = 7,
@@ -382,6 +384,9 @@ public sealed class SettingsSliceOwnershipContractTests
         ["src/DeskBox/Views/QuickCaptureWidgetWindow.xaml.cs"] = 12,
         ["src/DeskBox/Views/SearchPopupWindow.xaml.cs"] = 22,
         ["src/DeskBox/Views/SettingsSections/DesktopOrganizationSettingsSection.xaml.cs"] = 22,
+        // Per-widget management card (icon-label override): reads the file
+        // widget list and the global file-name line count directly.
+        ["src/DeskBox/Views/SettingsSections/FileWidgetSettingsSection.xaml.cs"] = 4,
         ["src/DeskBox/Views/SettingsWindow.HotkeyAndAppearance.cs"] = 4,
         ["src/DeskBox/Views/SettingsWindow.Maintenance.cs"] = 3,
         ["src/DeskBox/Views/SettingsWindow.Navigation.cs"] = 3,

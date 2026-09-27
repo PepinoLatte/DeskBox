@@ -147,7 +147,8 @@ public partial class WidgetViewModel
             SettingsService.MaxLayoutDensityScale);
 
         FileWidgetIconLayout iconLayout = FileWidgetIconLayout.Calculate(
-            settings, Config.IconSizeOverride, _systemTextScaleFactor);
+            settings, Config.IconSizeOverride, _systemTextScaleFactor,
+            Config.IconLabelHiddenOverride);
         IconLabelMaxWidth = iconLayout.LabelMaxWidth;
         IconTileWidth = iconLayout.TileWidth;
         IconTileMargin = iconLayout.TileMargin;
@@ -222,6 +223,43 @@ public partial class WidgetViewModel
 
         _settingsService.SaveDebounced();
         return true;
+    }
+
+    /// <summary>
+    /// Whether file names are hidden in this widget's icon view after
+    /// applying the per-widget override on top of the global setting.
+    /// </summary>
+    public bool EffectiveIconLabelHidden =>
+        FileWidgetIconLayout.ResolveEffectiveFileNameLineCount(
+            _settingsService.Settings.FileNameLineCount,
+            Config.IconLabelHiddenOverride) == SettingsService.HiddenFileNameLineCount;
+
+    public bool SetIconLabelHiddenOverride(bool? value)
+    {
+        if (Nullable.Equals(Config.IconLabelHiddenOverride, value))
+        {
+            return false;
+        }
+
+        Config.IconLabelHiddenOverride = value;
+        ApplyLayoutSettings();
+        RefreshStackLayoutMetrics();
+        OnPropertyChanged(nameof(EffectiveIconLabelHidden));
+        _settingsService.SaveDebounced();
+        return true;
+    }
+
+    /// <summary>
+    /// Flips the widget's effective label state while keeping the stored
+    /// override minimal: the override is cleared whenever it would agree
+    /// with the global file-name line count setting.
+    /// </summary>
+    public bool SetEffectiveIconLabelHidden(bool hidden)
+    {
+        bool globalHidden = FileWidgetIconLayout.ResolveEffectiveFileNameLineCount(
+            _settingsService.Settings.FileNameLineCount,
+            null) == SettingsService.HiddenFileNameLineCount;
+        return SetIconLabelHiddenOverride(hidden == globalHidden ? null : hidden);
     }
 
     private string GetMappedFolderDisplayName()
