@@ -358,7 +358,7 @@ public sealed class SettingsCopyAndHierarchyTests
                 appearanceXaml,
                 "Style=\"{StaticResource SettingCardIdentityGridStyle}\""));
         Assert.Equal(
-            5,
+            6,
             CountOccurrences(
                 fileWidgetXaml,
                 "Style=\"{StaticResource SettingCardIdentityGridStyle}\""));

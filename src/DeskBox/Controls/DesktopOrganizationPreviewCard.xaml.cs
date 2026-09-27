@@ -164,7 +164,8 @@ public sealed partial class DesktopOrganizationPreviewCard : UserControl, IDispo
         WidgetConfig? config = settings.Widgets.FirstOrDefault(item =>
             item.Id == (_selection.ExistingWidgetId ?? _target.TargetWidgetId));
         _layout = FileWidgetIconLayout.Calculate(settings, config?.IconSizeOverride,
-            WindowsCompatibilityService.ResolveSystemTextScaleFactor());
+            WindowsCompatibilityService.ResolveSystemTextScaleFactor(),
+            config?.IconLabelHiddenOverride);
         var tileAppearance = new PreviewTileAppearance(_layout, settings.HideShortcutArrowOverlay,
             settings.ShowImageFilesAsIcons, settings.ShowFileExtensions,
             settings.HideShortcutExtensionWhenShowingFileExtensions, settings.ShowFileItemPathTooltips,

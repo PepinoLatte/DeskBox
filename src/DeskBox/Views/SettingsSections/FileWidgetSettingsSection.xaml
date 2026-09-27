@@ -63,6 +63,44 @@
             </Border>
 
             <Border Style="{StaticResource SettingsGroupStyle}">
+                <StackPanel Margin="{StaticResource SettingsRowPadding}" Spacing="10">
+                    <Grid ColumnDefinitions="Auto,*" Style="{StaticResource SettingCardIdentityGridStyle}">
+                        <FontIcon Grid.Column="0" FontSize="18" Glyph="&#xE774;" IsHitTestVisible="False" VerticalAlignment="Center" />
+                        <StackPanel Grid.Column="1" IsHitTestVisible="False" Spacing="3" VerticalAlignment="Center">
+                            <TextBlock Style="{StaticResource SettingTitleTextStyle}" svc:Localized.Key="Settings.FileWidget.PerWidget.Title" />
+                            <TextBlock Style="{StaticResource SettingDescriptionTextStyle}" svc:Localized.Key="Settings.FileWidget.PerWidget.Description" />
+                        </StackPanel>
+                    </Grid>
+                    <ComboBox
+                        x:Name="PerWidgetPicker"
+                        MinWidth="240"
+                        MaxWidth="360"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        SelectionChanged="PerWidgetPicker_SelectionChanged" />
+                    <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="8" HorizontalAlignment="Left">
+                        <TextBlock
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource SettingTitleTextStyle}"
+                            svc:Localized.Key="Settings.FileWidget.PerWidget.IconLabelTitle" />
+                        <ToggleSwitch
+                            x:Name="PerWidgetIconLabelToggle"
+                            Grid.Column="1"
+                            MinWidth="0"
+                            VerticalAlignment="Center"
+                            OnContent=""
+                            OffContent=""
+                            Toggled="PerWidgetIconLabelToggle_Toggled" />
+                    </Grid>
+                    <TextBlock
+                        Style="{StaticResource SettingDescriptionTextStyle}"
+                        TextWrapping="Wrap"
+                        svc:Localized.Key="Settings.FileWidget.PerWidget.IconLabelDescription" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource SettingsGroupStyle}">
                 <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="12" Margin="4">
                     <Button Grid.Column="0" Click="NestedSettingsButton_Click" Style="{StaticResource DrillDownRowStyle}" Tag="FileStackSettings">
                         <Grid ColumnDefinitions="Auto,*" Style="{StaticResource SettingCardIdentityGridStyle}">

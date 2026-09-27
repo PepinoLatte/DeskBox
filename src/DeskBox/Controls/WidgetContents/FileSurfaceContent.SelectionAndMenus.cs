@@ -764,6 +764,14 @@ public sealed partial class FileSurfaceContent
         };
         viewAndSort.Items.Add(listView);
         viewAndSort.Items.Add(CreateIconSizeMenu());
+        var hideIconLabelItem = new ToggleMenuFlyoutItem
+        {
+            Text = T("Widget.IconLabel.Hidden"),
+            IsChecked = ViewModel.EffectiveIconLabelHidden
+        };
+        hideIconLabelItem.Click += (_, _) =>
+            ViewModel.SetEffectiveIconLabelHidden(!ViewModel.EffectiveIconLabelHidden);
+        viewAndSort.Items.Add(hideIconLabelItem);
         viewAndSort.Items.Add(new MenuFlyoutSeparator());
         AddSortItem(
             viewAndSort,

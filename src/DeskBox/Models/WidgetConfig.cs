@@ -79,6 +79,15 @@ public class WidgetConfig
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public double? IconSizeOverride { get; set; }
 
+    /// <summary>
+    /// Optional icon-label visibility override for this file widget. A null
+    /// value follows the global file name line count setting; <c>true</c>
+    /// hides file names in the icon view, <c>false</c> forces them visible
+    /// even when the global setting hides them.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public bool? IconLabelHiddenOverride { get; set; }
+
     /// <summary>Whether the widget window is currently shown.</summary>
     public bool IsVisible { get; set; } = true;
 
